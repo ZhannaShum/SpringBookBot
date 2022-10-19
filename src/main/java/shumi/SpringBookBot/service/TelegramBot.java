@@ -8,6 +8,7 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import shumi.SpringBookBot.config.BotConfig;
+import shumi.SpringBookBot.logic.logicClass;
 
 @Component
 public class TelegramBot extends TelegramLongPollingBot {
@@ -37,32 +38,20 @@ public class TelegramBot extends TelegramLongPollingBot {
             long chatId = update.getMessage().getChatId();
 
             switch (messageText) {
+
                 case "/start":
-                    startCommandReceived(chatId, update.getMessage().getChat().getFirstName());
+                    var s = logicClass.startCommandReceived(update.getMessage().getChat().getFirstName());
+                    sendMessage(chatId, s);
                     break;
                 case "/help":
-                    helpCommandReceived(chatId, update.getMessage().getChat().getFirstName());
+                    var d = logicClass.helpCommandReceived(update.getMessage().getChat().getFirstName());
+                    sendMessage(chatId, d);
                     break;
                 default:
                     sendMessage(chatId, "Sorry, I don't understand you");
             }
         }
 
-    }
-
-    private void startCommandReceived(long chatId, String name) {
-
-        // var
-        String answerStart = "Hi, " + name + "!";
-
-        sendMessage(chatId, answerStart);
-    }
-
-    private void helpCommandReceived(long chatId, String name) {
-
-        String answerHelp = "Hi, " + name + "!" + " You don't know what to read today? Don't worry! We will try to help you ~ ";
-
-        sendMessage(chatId, answerHelp);
     }
 
     private void sendMessage(long chatId, String textToSend) {
