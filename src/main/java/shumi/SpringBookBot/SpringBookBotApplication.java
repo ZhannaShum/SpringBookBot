@@ -7,10 +7,10 @@ import shumi.SpringBookBot.service.ConsoleBot;
 @SpringBootApplication
 public class SpringBookBotApplication {
 
-	public static void main(String[] args) {
-		//ConsoleBot.onUpdateReceived();
+    public static void main(String[] args) {
+        //ConsoleBot.onUpdateReceived();
 
-		SpringApplication.run(SpringBookBotApplication.class, args);
-	}
+        SpringApplication.run(SpringBookBotApplication.class, args);
+    }
 
 }
