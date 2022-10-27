@@ -12,7 +12,6 @@ public class ConsoleBot {
         System.out.println("What's your name?");
         Scanner text = new Scanner(System.in);
         var name = text.nextLine();
-        ;
 
         while (true) {
             var instruction = text.nextLine();
