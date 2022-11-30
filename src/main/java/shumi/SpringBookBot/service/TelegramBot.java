@@ -35,23 +35,14 @@ public class TelegramBot extends TelegramLongPollingBot {
     @Override
     public void onUpdateReceived(Update update) {
         var logic = new LogicBot();
-        if ( update.hasMessage() && update.getMessage().hasText()) {
+        if (update.hasMessage() && update.getMessage().hasText()) {
             var text = update.getMessage().getText();
             long chatId = update.getMessage().getChatId();
-            var answer = "";
-            switch (text) {
-                case "/byAuthor":
-                    sendMessage(chatId, "Книгу какого автора " +
-                            "вы бы хотели почитать? Введите имя и фамилию");
-                    //TimeUnit.SECONDS.sleep(40);
-                    answer = logic.handle(text, "Федор Достоевский");
-                    break;
-                default:
-                    answer = logic.handle(text, update.getMessage().getChat().getFirstName());
-            }
+            var answer = logic.handle(text, update.getMessage().getChat().getFirstName());
             sendMessage(chatId, answer);
         }
     }
+
 
     private void sendMessage(long chatId, String textToSend) {
         SendMessage message = new SendMessage();
